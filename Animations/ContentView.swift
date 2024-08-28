@@ -8,14 +8,32 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var enable = false
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        Button("Tap Me"){
+            enable.toggle()
         }
-        .padding()
+        .frame(width: 200,height: 200)
+        .background(enable ? .blue : .red)
+        .foregroundColor(.white)
+        .clipShape(.rect(cornerRadius: enable ? 60 : 0))
+        .animation(.default, value: enable)
+        //order we apply the animation matters
+//        .clipShape(.rect(cornerRadius: enable ? 60 : 0))
+        
+        Button("Tap Me"){
+            enable.toggle()
+        }
+        .frame(width: 200,height: 200)
+        .background(enable ? .blue : .red)
+        .foregroundColor(.white)
+        .animation(nil, value: enable)
+        .clipShape(.rect(cornerRadius: enable ? 60 : 0))
+        .animation(.spring(Spring(duration: 1,bounce: 0.9)), value: enable)
+        
+        
     }
 }
 
