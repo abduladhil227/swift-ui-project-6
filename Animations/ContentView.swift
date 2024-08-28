@@ -8,14 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var isShowingRed = false
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Button("Tap Me"){
+                withAnimation{
+                    isShowingRed.toggle()
+                }
+            }
+            
+            if isShowingRed{
+                Rectangle()
+                    .fill(.red)
+                    .frame(width: 200,height: 200)
+                    .transition(.asymmetric(insertion: .opacity, removal: .scale))
+                    //.transition(.scale)
+            }
         }
-        .padding()
+        
     }
 }
 
